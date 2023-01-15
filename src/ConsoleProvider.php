@@ -14,5 +14,6 @@ class ConsoleProvider implements Bootable
     public function boot(): void
     {
         $this->container->alias(\Weebel\Contracts\CommandContainer::class, CommandContainer::class);
+        $this->container->set(CommandContainer::class, CommandContainer::getInstance());
     }
 }
