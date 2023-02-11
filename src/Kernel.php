@@ -3,6 +3,8 @@
 namespace Weebel\Console;
 
 use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Weebel\Console\Events\CommandResolved;
 use Weebel\Contracts\Bootable;
 use Weebel\Contracts\CommandContainer;
 
@@ -11,6 +13,7 @@ class Kernel implements Bootable
     public function __construct(
         protected ContainerInterface $container,
         protected CommandContainer   $commandContainer,
+        protected EventDispatcherInterface    $eventDispatcher
     ) {
     }
 
@@ -29,14 +32,21 @@ class Kernel implements Bootable
         $command = $this->resolveCommand(array_shift($commandArray));
 
         if (!is_callable($command)) {
-            throw new ConsoleException(sprintf("Command %s should be callable and have an invoke message", get_class($command)));
+            throw new ConsoleException(sprintf("Command %s should be callable and have an invoke method", get_class($command)));
         }
 
         [$arguments, $options] = $this->resolveArgumentsAndOptions($commandArray);
 
         $command->setOptions($options);
 
-        ($command)(...$arguments);
+        try {
+            $this->eventDispatcher->dispatch(new CommandResolved($command, $arguments, $options));
+        } catch (PreventCommandRunningException $preventCommandRunning) {
+            return 0;
+        }
+
+
+        return ($command)(...$arguments);
     }
 
     /**
@@ -61,6 +71,8 @@ class Kernel implements Bootable
         foreach ($commandArray as $item) {
             if (preg_match("/--(.*)=(.*)/", $item, $matches)) {
                 $options[$matches[1]] = $matches[2];
+            } elseif (preg_match("/--(.*)/", $item, $matches)) {
+                $options[$matches[1]] = true;
             } elseif (preg_match("/-(.*)/", $item, $matches)) {
                 $options[$matches[1]] = true;
             } else {
