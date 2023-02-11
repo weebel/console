@@ -2,16 +2,11 @@
 
 namespace Weebel\Console;
 
-use Psr\Container\ContainerInterface;
 use Weebel\Console\Events\CommandResolved;
 
 class CheckOptions
 {
     use HasClimate;
-
-    public function __construct(protected ContainerInterface $container)
-    {
-    }
 
     public function __invoke(CommandResolved $event)
     {
@@ -32,20 +27,9 @@ class CheckOptions
             throw new PreventCommandRunningException();
         }
 
-        if (array_key_exists('v', $options)){
-            $exceptionHandler = $this->getExceptionHandler();
+        if (array_key_exists('v', $options)) {
+            $exceptionHandler = ExceptionHandler::getInstance();
             $exceptionHandler->debug = true;
-
         }
-    }
-
-    /**
-     * @return mixed
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    private function getExceptionHandler(): ExceptionHandler
-    {
-        return $this->container->get(ExceptionHandler::class);
     }
 }
