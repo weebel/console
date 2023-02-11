@@ -88,7 +88,7 @@ trait HasClimate
             $this->CLImate = new CLImate();
         }
 
-        $this->CLImate->{$name}(...$arguments);
+        return $this->CLImate->{$name}(...$arguments);
     }
 
     public function getCLImate(): ?CLImate
