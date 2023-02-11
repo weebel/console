@@ -21,6 +21,8 @@
     "symfony/var-dumper": "^6.0",
     "phpunit/phpunit": "^9.5",
     "friendsofphp/php-cs-fixer": "^3.13",
-    "mockery/mockery": "^1.5"
+    "mockery/mockery": "^1.5",
+    "weebel/container": "^0.1.2",
+    "weebel/dispatcher": "dev-master"
   }
 }
