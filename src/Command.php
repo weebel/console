@@ -12,11 +12,6 @@ abstract class Command
     protected array $validOptions = [];
     protected array $validArguments = [];
 
-    public static function name()
-    {
-        return static::NAME;
-    }
-
     public function setOptions(array $options): Command
     {
         $this->options = $options;
@@ -36,7 +31,10 @@ abstract class Command
         return $this->validOptions;
     }
 
-
+    public function getValidArguments(): array
+    {
+        return $this->validArguments;
+    }
 
     public function __get(string $name)
     {
