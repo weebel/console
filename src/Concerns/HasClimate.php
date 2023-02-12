@@ -1,6 +1,6 @@
 <?php
 
-namespace Weebel\Console;
+namespace Weebel\Console\Concerns;
 
 use League\CLImate\CLImate;
 use League\CLImate\TerminalObject\Dynamic\Spinner;
