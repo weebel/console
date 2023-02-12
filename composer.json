@@ -1,7 +1,16 @@
 {
   "name": "weebel/console",
+  "description": "PHP console kernel with built-in command handling for CLI applications",
+  "type": "library",
+  "license": "MIT",
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Mohamadreza Pishdad",
+      "email": "mpishdad89@gmail.com"
+    }
+  ],
   "require": {
     "weebel/contracts": "dev-master",
     "league/climate": "^3.8"

@@ -24,10 +24,11 @@ class ExceptionHandler implements ExceptionHandlerInterface
 
     public function handle(Throwable $exception): void
     {
-        $this->backgroundRed($exception->getMessage());
         if ($this->debug) {
-            foreach ($exception->getTrace() as $line) {
-                $this->out($line);
+            $this->yellow()->inline($exception->getFile())->red()->inline(':'.$exception->getLine())->br();
+
+            foreach ($exception->getTrace() as $item) {
+                $this->inline($item['file'])->inline(':'.$item['line'])->br();
             }
         }
     }
