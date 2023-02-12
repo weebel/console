@@ -1,6 +1,6 @@
 {
   "name": "weebel/console",
-  "description": "PHP console kernel with built-in command handling for CLI applications",
+  "description": "A lightweight and extensible command line interface (CLI) for PHP applications.",
   "type": "library",
   "license": "MIT",
   "minimum-stability": "dev",
