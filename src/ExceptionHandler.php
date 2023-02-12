@@ -4,6 +4,7 @@ namespace Weebel\Console;
 
 use Throwable;
 use Weebel\Contracts\ExceptionHandlerInterface;
+use Weebel\Console\Concerns\HasClimate;
 
 class ExceptionHandler implements ExceptionHandlerInterface
 {

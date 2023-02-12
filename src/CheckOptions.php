@@ -3,6 +3,7 @@
 namespace Weebel\Console;
 
 use Weebel\Console\Events\CommandResolved;
+use Weebel\Console\Concerns\HasClimate;
 
 class CheckOptions
 {
