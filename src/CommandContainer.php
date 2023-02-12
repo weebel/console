@@ -17,11 +17,11 @@ class CommandContainer implements CommandContainerInterface
     public function register(string $commandClassName): void
     {
         try {
-            $this->registered[$commandClassName::name()] = $commandClassName;
+            $this->registered[$commandClassName::NAME] = $commandClassName;
         } catch (\Throwable $exception) {
             throw new ConsoleException(
                 sprintf(
-                    'Command %s should have static name() method returning the command name as string. %s',
+                    'Command %s should have a constant NAME returning the command name as string. %s',
                     $commandClassName,
                     $exception->getMessage()
                 )

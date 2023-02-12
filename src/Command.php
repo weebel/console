@@ -6,7 +6,7 @@ abstract class Command
 {
     protected $options = [];
 
-    protected const NAME = "name";
+    public const NAME = "name";
     public const DESCRIPTION = "description";
 
     protected array $validOptions = [];
